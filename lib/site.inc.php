@@ -18,8 +18,6 @@ if(isset($_SESSION['user'])) {
 }
 
 
-
-
 // redirect if user is not logged in
 if(!isset($login) && $user === null) {
     $root = $site->getRoot();

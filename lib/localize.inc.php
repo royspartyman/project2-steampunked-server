@@ -14,7 +14,7 @@ return function(Site $site) {
     // Set the time zone
     date_default_timezone_set('America/Detroit');
     $site->setEmail('perrym23@cse.msu.edu');
-    $site->setRoot('/~perrym23/cse476/proj2');
+    $site->setRoot('/~perrym23/cse476/project2');
     $site->dbConfigure('mysql:host=mysql-user.cse.msu.edu;dbname=perrym23',
         'perrym23',       // Database user
         'redred',     // Database password

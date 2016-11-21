@@ -3,18 +3,13 @@
 class NewUsers extends Table{
 
     public function __construct(Site $site) {
-        parent::__construct($site, "SteampunkedUser");
+        parent::__construct($site, "steampunked_user");
 
     }
 
 
     public function newUser($userid,$password) {
 
-
-        if(strlen($password) < 8) {
-            echo "Passwords must be at least 8 characters long";
-            return null;
-        }
 
         // Ensure we have no duplicate user ID or email address
         $users = new Users($this->site);
@@ -39,7 +34,7 @@ SQL;
 
         $message = "success";
 
-    return $message;
+        return $message;
 
     }
 

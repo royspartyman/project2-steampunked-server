@@ -5,7 +5,7 @@ class Users extends Table {
 
 
     public function __construct(Site $site) {
-        parent::__construct($site, "SteampunkedUser");
+        parent::__construct($site, "steampunked_user");
 
     }
 
