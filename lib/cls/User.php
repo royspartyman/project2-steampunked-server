@@ -8,7 +8,7 @@ class User {
 
 
     public function __construct($row) {
-        $this->Id = $row['Id'];
+        $this->Id = $row['id'];
         $this->username = $row['username'];
         $this->password = $row['password'];
 
