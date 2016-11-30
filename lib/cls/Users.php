@@ -1,20 +1,20 @@
 <?php
 
-class Users extends Table {
+class Users extends Table
+{
 
 
-
-    public function __construct(Site $site) {
+    public function __construct(Site $site)
+    {
         parent::__construct($site, "steampunked_user");
 
     }
 
 
-    public function login($user, $password) {
+    public function login($user, $password)
+    {
 
-
-
-        $sql =<<<SQL
+        $sql = <<<SQL
 SELECT * from $this->tableName
 where username=?
 SQL;
@@ -22,7 +22,7 @@ SQL;
         $pdo = $this->pdo();
         $statement = $pdo->prepare($sql);
         $statement->execute(array($user));
-        if($statement->rowCount() === 0) {
+        if ($statement->rowCount() === 0) {
             return null;
         }
 
@@ -30,16 +30,13 @@ SQL;
 
         $pass = $row['password'];
 
-
-        // Ensure it is correct
-        if($password !==$pass) {
+        if ($password !== $pass) {
             return null;
         }
 
 
         return new User($row);
     }
-
 
 
     public function exists($username)
@@ -59,8 +56,4 @@ SQL;
         }
 
     }
-
-
-
-
 }

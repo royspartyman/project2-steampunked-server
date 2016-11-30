@@ -19,5 +19,4 @@ if($msg !== null) {
     echo $message;
 }
 }
-
 ?>

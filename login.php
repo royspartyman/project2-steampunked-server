@@ -2,20 +2,28 @@
 $login = false;
 require_once "lib/site.inc.php";
 
-if(isset($_REQUEST['username']) && isset($_REQUEST['password'])) {
+if (isset($_REQUEST['username']) && isset($_REQUEST['password'])) {
 
     $users = new Users($site);
 
     $user = $users->login($_REQUEST['username'], $_REQUEST['password']);
-    if($user !== null) {
+    if ($user !== null) {
         $_SESSION['user'] = $user;
         $message = "success";
         echo $message;
         exit;
-    }else{
+    } else {
         $message = 'failed login';
         echo $message;
     }
 }
 
 ?>
+
+
+
+
+
+
+
+
