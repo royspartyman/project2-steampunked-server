@@ -14,23 +14,14 @@ class NewGame extends Table
 
         $this->RemoveGameFromRecord($userid);
 
-        $sql2 = <<<SQL
-INSERT INTO gcm(token,username)
-values(?, ?)
-SQL;
-
-        $statement2 = $this->pdo()->prepare($sql2);
-        $statement2->execute(array($token, $userid));
-
-
 // Add a record to the newuser table
         $sql = <<<SQL
-REPLACE INTO $this->tableName(playerOneId, game)
-values(?, ?)
+REPLACE INTO $this->tableName(playerOneId, currentPlayer, game)
+values(?, ?, ?)
 SQL;
 
         $statement = $this->pdo()->prepare($sql);
-        if ($statement->execute(array($userid, $game))) {
+        if ($statement->execute(array($userid, $userid, $game))) {
             $message = "success";
             return $message;
 

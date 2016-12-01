@@ -13,6 +13,7 @@ class Game
         $this->Id = $row['gameId'];
         $this->username1 = $row['playerOneId'];
         $this->username2 = $row['playerTwoId'];
+        $this->currentPlayer = $row['currentPlayer'];
         $this->game = $row['game'];
 
     }
@@ -31,6 +32,11 @@ class Game
     public function getPlayerTwo()
     {
         return $this->username2;
+    }
+
+    public function getCurrentPlayer()
+    {
+        return $this->currentPlayer;
     }
 
     public function getTheGame()
