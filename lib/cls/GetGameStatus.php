@@ -33,4 +33,55 @@ SQL;
         exit;
 
     }
+
+    public function CheckIfReady($userid)
+    {
+
+
+        $sql = <<<SQL
+SELECT playerTwoId FROM $this->tableName WHERE (playerOneId = ?)
+SQL;
+        $row = $this->pdo()->prepare($sql);
+        $row->execute(array($userid));
+        $data = $row->fetch();
+
+        if($data[0] == ""){
+            return null;
+        }else{
+            return true;
+        }
+    }
+
+    public function getOtherUser($userid)
+    {
+
+        $sql = <<<SQL
+SELECT playerTwoId FROM $this->tableName WHERE (playerOneId = ?)
+SQL;
+        $row = $this->pdo()->prepare($sql);
+        $row->execute(array($userid));
+        $data = $row->fetch();
+
+        if($data[0] == $userid || $data[0] == ""){
+            $sql = <<<SQL
+SELECT playerOneId FROM $this->tableName WHERE (playerTwoId = ?)
+SQL;
+            $row = $this->pdo()->prepare($sql);
+            $row->execute(array($userid));
+            $data = $row->fetch();
+
+        }
+
+        $sql = <<<SQL
+UPDATE $this->tableName
+SET currentPlayer = ?
+where playerOneId = ? OR playerTwoId = ?
+SQL;
+
+        $statement = $this->pdo()->prepare($sql);
+        $statement->execute(array($data[0], $userid, $userid));
+
+        $message = "success";
+        return $message;
+    }
 }

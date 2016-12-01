@@ -9,7 +9,7 @@ class NewGame extends Table
 
     }
 
-    public function newGame($userid, $token, $game)
+    public function newGame($userid, $game)
     {
 
         $this->RemoveGameFromRecord($userid);
@@ -26,7 +26,6 @@ SQL;
             return $message;
 
         } else {
-
             $message = null;
             return $message;
         }
