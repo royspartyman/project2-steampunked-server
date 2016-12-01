@@ -7,7 +7,7 @@ if (isset($_REQUEST['username']) && isset($_REQUEST['game'])) {
 
     $game = new NewGame($site);
 
-    $message = $game->newGame($_REQUEST['username'], $_REQUEST['token'], $_REQUEST['game']);
+    $message = $game->newGame($_REQUEST['username'], $_REQUEST['game']);
 
     if ($message !== null) {
         $message = "success";
