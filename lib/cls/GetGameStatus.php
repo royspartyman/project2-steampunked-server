@@ -69,7 +69,6 @@ SQL;
             $row = $this->pdo()->prepare($sql);
             $row->execute(array($userid));
             $data = $row->fetch();
-
         }
 
         $sql = <<<SQL
@@ -83,5 +82,17 @@ SQL;
 
         $message = "success";
         return $message;
+    }
+
+    public function getPlayerTwo($userid)
+    {
+        $sql = <<<SQL
+SELECT playerTwoId FROM $this->tableName WHERE (playerOneId = ?)
+SQL;
+        $row = $this->pdo()->prepare($sql);
+        $row->execute(array($userid));
+        $data = $row->fetch();
+
+        return $data[0];
     }
 }
