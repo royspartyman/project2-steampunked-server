@@ -95,4 +95,27 @@ SQL;
 
         return $data[0];
     }
+
+    public function getPlayerOne($userid)
+    {
+        $sql = <<<SQL
+SELECT playerOneId FROM $this->tableName WHERE (playerTwoId = ?)
+SQL;
+        $row = $this->pdo()->prepare($sql);
+        $row->execute(array($userid));
+        $data = $row->fetch();
+
+        return $data[0];
+    }
+
+    public function getCurrentPlayer($userid)
+    {
+        $sql = <<<SQL
+SELECT currentPlayer FROM $this->tableName WHERE (playerOneId = ? OR playerTwoId = ?)
+SQL;
+        $row = $this->pdo()->prepare($sql);
+        $row->execute(array($userid, $userid));
+        $data = $row->fetch();
+        return $data[0];
+    }
 }
