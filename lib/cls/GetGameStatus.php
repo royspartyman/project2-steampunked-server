@@ -56,32 +56,39 @@ SQL;
     {
 
         $sql = <<<SQL
-SELECT playerTwoId FROM $this->tableName WHERE (playerOneId = ?)
+SELECT currentPlayer FROM $this->tableName WHERE (playerTwoId = ?)
 SQL;
         $row = $this->pdo()->prepare($sql);
         $row->execute(array($userid));
         $data = $row->fetch();
 
-        if($data[0] == $userid || $data[0] == ""){
+        if($data[0] == $userid){
             $sql = <<<SQL
 SELECT playerOneId FROM $this->tableName WHERE (playerTwoId = ?)
 SQL;
+
             $row = $this->pdo()->prepare($sql);
             $row->execute(array($userid));
             $data = $row->fetch();
-        }
 
-        $sql = <<<SQL
+            $sql = <<<SQL
 UPDATE $this->tableName
 SET currentPlayer = ?
-where playerOneId = ? OR playerTwoId = ?
 SQL;
+            $statement = $this->pdo()->prepare($sql);
+            $statement->execute(array($data[0]));
+            return true;
 
-        $statement = $this->pdo()->prepare($sql);
-        $statement->execute(array($data[0], $userid, $userid));
+        }else{
+            $sql = <<<SQL
+UPDATE $this->tableName
+SET currentPlayer = ?
+SQL;
+            $statement = $this->pdo()->prepare($sql);
+            $statement->execute(array($userid));
+            return true;
+        }
 
-        $message = "success";
-        return $message;
     }
 
     public function getPlayerTwo($userid)

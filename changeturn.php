@@ -9,7 +9,7 @@ if (isset($_REQUEST['username'])) {
 
     $message = $game->getOtherUser($_REQUEST['username']);
 
-        echo $message;
+    echo $message;
 }
 
 ?>
