@@ -33,15 +33,15 @@ SQL;
     }
 
 
-    public function CheckIfThereIsAGame($userid)
+    public function CheckIfThereIsAGame($userid, $gameSize)
     {
 
         $sql = <<<SQL
-SELECT * FROM $this->tableName WHERE (playerTwoId IS NULL OR playerTwoId ='') AND (playerOneId IS NOT NULL) AND (playerOneId <> ?)
+SELECT * FROM $this->tableName WHERE (playerTwoId IS NULL OR playerTwoId ='') AND (playerOneId IS NOT NULL) AND (playerOneId <> ?) AND (gameSize = ?)
 SQL;
 
         $statement = $this->pdo()->prepare($sql);
-        $statement->execute(array($userid));
+        $statement->execute(array($userid, $gameSize));
 
         if ($statement->rowCount() === 0) {
             return null;

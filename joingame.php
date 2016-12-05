@@ -7,7 +7,7 @@ if (isset($_REQUEST['username'])) {
 
     $game = new JoinGame($site);
 
-    $message = $game->CheckIfThereIsAGame($_REQUEST['username']);
+    $message = $game->CheckIfThereIsAGame($_REQUEST['username'], $_REQUEST['size'] );
 
 
     if ($message !== null) {

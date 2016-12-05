@@ -9,19 +9,19 @@ class NewGame extends Table
 
     }
 
-    public function newGame($userid, $game)
+    public function newGame($userid, $gameSize, $game)
     {
 
         $this->RemoveGameFromRecord($userid);
 
 // Add a record to the newuser table
         $sql = <<<SQL
-REPLACE INTO $this->tableName(playerOneId, currentPlayer, game)
-values(?, ?, ?)
+REPLACE INTO $this->tableName(playerOneId, currentPlayer, gameSize, game)
+values(?, ?, ?, ?)
 SQL;
 
         $statement = $this->pdo()->prepare($sql);
-        if ($statement->execute(array($userid, $userid, $game))) {
+        if ($statement->execute(array($userid, $userid, $gameSize, $game))) {
             $message = "success";
             return $message;
 
